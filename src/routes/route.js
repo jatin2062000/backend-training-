@@ -28,11 +28,79 @@ router.get('/student-details/:name', function(req, res){
 
     // JSON strigify function helps to print an entire object
     // We can use any ways to print an object in Javascript, JSON stringify is one of them
-    console.log("This is the request "+ JSON.stringify(requestParams))
+    console.log("This is the request "+ JSON.stringify(req.Params))
     let studentName = requestParams.name
     console.log('Name of the student is ', studentName)
-    
-    res.send('Dummy response')
+    let studentDetail = studentName + "" + studentName
+    res.send(studentDetail)
 })
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//1st//
+
+router.get('/get-movies',function(req, res){ //student detail api he 
+    let movies1= ["shole ","Rang de basanti","dil mange more","tiranga"]//api is implementation is used to send response for request
+    res.send(movies1)//movies wala iske jese krna he
+})
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//// 2nd/////
+
+ 
+router.get('/get-movie/:indexNumber',function(req, res){ 
+    
+    let movies=['rang de basanti','The shining','Lord of the rings','batman begins']
+    let index = req.params.indexNumber;
+    console.log(movies[index])
+     res.send(movies[index])
+})
+  
+
+/////////////////////////////////////////////////////////////
+///////    3rd //////////////////////////////////////
+
+router.get('/get-moviess/:indexNumber',function(req, res){ 
+    
+    let moviesName=['rang de basanti','The shining','Lord of the rings','batman begins']
+    let index = req.params.indexNumber;
+
+     if(index > moviesName.length){
+        return res.send("use a valid index  ")
+     }else{
+    
+     res.send(moviesName[index])
+     
+     }
+})
+
+////////////////////////////////////////////////////////////
+///////////// 4th ////////////////////
+
+router.get('/get-/films',function(req, res){ 
+
+    let moviesName=[ {"id": 1,"name": "The Shining"}, 
+ {"id": 2,"name": "Incendies"}, 
+ {"id": 3,"name": "Rang de Basanti"},
+  {"id": 4,"name": "Finding Nemo"}]
+    res.send(moviesName)
+})
+
+//////////////////////////////////////////////////
+////////////// 5th /////////////////////////////////
+
+router.get('/get-/films/:indexNumber',function(req, res){ 
+
+    let moviesName=[ {"id": 1,"name": "The Shining"}, 
+ {"id": 2,"name": "Incendies"}, 
+ {"id": 3,"name": "Rang de Basanti"},
+  {"id": 4,"name": "Finding Nemo"}]
+    let index = req.params.indexNumber;
+     if(index > moviesName.length){
+        return res.send("no movie exist with this id ")
+     }else{
+     res.send(moviesName[index])
+     }
+})
+
+
 
 module.exports = router;
