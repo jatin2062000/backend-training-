@@ -107,8 +107,49 @@ router.post('/players', function (req, res) {
 
   //LOGIC WILL COME HERE
   let jatintheplayer = req.body.player
+  let hello = jatintheplayer.name
+
+  for (i = 0; i < players.length; i++) {
+    if (players[i].name == hello) {
+      return res.send("Sorry, This name is already exist!")
+    }
+  }
   players.push(jatintheplayer)
-  res.send({ data: players , status: true })
+  res.send({players})
 })
+
+
+// let persons =[
+//   {
+//       name: "PK",
+//       age: 10,
+//       votingStatus: false
+      
+//   },
+//   {
+//       name: "SK",
+//       age: 20,
+//       votingStatus: false
+      
+//   },
+//   {
+//       name: "AA",
+//       age: 70,
+//       votingStatus: false
+      
+//   },
+//   {
+//       name: "SC",
+//       age: 5,
+//       votingStatus: false
+      
+//   },
+//   {
+//       name: "HO",
+//       age: 40,
+//       votingStatus: false
+      
+//   }
+// ]
 
 module.exports = router;
