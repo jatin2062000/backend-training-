@@ -1,6 +1,9 @@
 const express = require('express');
 const router = express.Router();
 
+
+
+
 router.get('/students/:name', function(req, res) {
     let studentName = req.params.name
     console.log(studentName)
@@ -118,38 +121,155 @@ router.post('/players', function (req, res) {
   res.send({players})
 })
 
+let playerName =
+   [
+       {
+           name: "manish",
+           dob: "1/1/1995",
+           gender: "male",
+           city: "jalandhar",
+           sports: ["swimming"],
+           bookings: [
+               {
+                   bookingNumber: 1,
+                   sportId: "",
+                   centerId: "",
+                   type: "private",
+                   slot: '1234000000',
+                   bookedOn: '31/08/2021',
+                   bookedFor: '01/09/2021'
+               },
+               {
+                   bookingNumber: 2,
+                   sportId: "",
+                   centerId: "",
+                   type: "private",
+                   slot: '12456000000',
+                   bookedOn: '31/08/2001',
+                   bookedFor: '01/09/2001'
+               },
+           ]},
+       {
+           name: "gopal",
+           dob: "1/09/1995",
+           gender: "male",
+           city: "delhi",
+           sports: ["soccer"],
+           bookings: []
+       },
+       {
+           name: "lokesh",
+           dob: "1/1/1990",
+           gender: "male",
+           city: "mumbai",
+           sports: ["soccer"],
+           bookings: [
+       
+            {
+                bookingNumber: 4,
+                sportId: "",
+                centerId: "",
+                type: "private",
+                slot: '131245000000',
+                bookedOn: '31/08/2020',
+                bookedFor: '01/09/2020'
+            }
+        ]
+       }
+   ]
 
-// let persons =[
-//   {
-//       name: "PK",
-//       age: 10,
-//       votingStatus: false
-      
-//   },
-//   {
-//       name: "SK",
-//       age: 20,
-//       votingStatus: false
-      
-//   },
-//   {
-//       name: "AA",
-//       age: 70,
-//       votingStatus: false
-      
-//   },
-//   {
-//       name: "SC",
-//       age: 5,
-//       votingStatus: false
-      
-//   },
-//   {
-//       name: "HO",
-//       age: 40,
-//       votingStatus: false
-      
-//   }
-// ]
+router.post('/player/:playerName/booking/:bookingId',function (request, response){
+  const playerName = request.params.playerName;
+  const bookingId = request.params.bookingId;
+  const bookingData = request.body;
+  bookingData.bookingNumber = Number(bookingId);
+  
+  let playerNameStatus = "", bookingIdStatus = "";
+  
+  for(let i = 0; i < players.length; i++){
+  if(players[i].name == playerName){
+  playerNameStatus = i;
+  break;
+  }
+  else{
+  playerNameStatus = null;
+  }
+  }
+  if(playerNameStatus != null){
+  if(players[playerNameStatus].bookings.length == 0){
+  bookingIdStatus = players[playerNameStatus].bookings;
+  }
+  else{
+  for(let i = 0; i < players[playerNameStatus].bookings.length; i++){
+  if(players[playerNameStatus].bookings[i].bookingNumber == bookingId){
+  bookingIdStatus = null;
+  break;
+  }
+  else{
+  bookingIdStatus = players[playerNameStatus].bookings;
+  }
+  }
+  }
+  if(bookingIdStatus != null){
+  bookingIdStatus.push(bookingData);
+  response.send(players);
+  }
+  else{
+  response.send("Booking number already exist !");
+  }
+  }
+  else{
+  response.send("Player name not found !");
+  }
+  });
+
+  let persons = [
+    {
+        name: "PK",
+        age: 10,
+        votingStatus: false
+    },
+    {
+        name: "SK",
+        age: 20,
+        votingStatus: false
+    },
+    {
+        name: "AA",
+        age: 70,
+        votingStatus: false
+    },
+    {
+        name: "SC",
+        age: 5,
+        votingStatus: false
+    },
+    {
+        name: "HO",
+        age: 40,
+        votingStatus: false
+    }
+]
+
+
+
+router.post('/voting', function(req, res){
+    let age=req.query.age
+    
+    let elegiPerson=[]
+    for (let i=0; i<persons.length; i++){
+        if(persons[i].age>=age){
+            persons[i].votingStatus=true
+            elegiPerson.push(persons[i])
+        }
+    }if(elegiPerson.length==0){
+        return res.send('No data to show.')
+    }else{
+    return res.send(elegiPerson)
+    }
+})
+
+
+
 
 module.exports = router;
