@@ -26,7 +26,7 @@ router.post("/createBook", BookController.createBook)
 router.get("/getBooksbyChetanBhagat", BookController.getBooksbyChetanBhagat)
 
 router.get("/authorOfBOok", BookController.authorOfBOok)
-router.get("/authorName", BookController.authorName)
+router.get("/authorName", BookController.authorsName)
 module.exports = router;
 
 //MOMENT JS
