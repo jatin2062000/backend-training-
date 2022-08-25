@@ -14,7 +14,6 @@ mongoose.connect("mongodb+srv://jatinkumar0007:zWDyt4ENYWMMhjva@cluster0.a0k73vb
 .then( () => console.log("MongoDb is connected"))
 .catch ( err => console.log(err) );
 
-
 const moment = require('moment');
 let time = moment();
 app.use (function (req, res, next) {
@@ -26,6 +25,12 @@ app.use (function (req, res, next) {
     console.log(time.format('YYYY,MM,DD'));
     next()
 })
+// app.use (
+//     function (req, res, next) {
+//         console.log ("inside GLOBAL MW");
+//         next();
+//   }
+//   );
 
 app.use('/', route);
 
