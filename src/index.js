@@ -1,22 +1,27 @@
 const express = require('express');
-const bodyParser = require('body-parser');
-const route = require('./routes/route.js');
+var bodyParser = require('body-parser');
 const { default: mongoose } = require('mongoose');
+const route = require('./routes/route.js');
+const moment = require('moment');
 const app = express();
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
-
-mongoose.connect("mongodb+srv://users-open-to-all:hiPassword123@cluster0.uh35t.mongodb.net/skDB?retryWrites=true&w=majority", {
-    useNewUrlParser: true
-})
+mongoose.connect("mongodb+srv://jatinkumar0007:zWDyt4ENYWMMhjva@cluster0.a0k73vb.mongodb.net/test", 
+{useNewUrlParser: true})
 .then( () => console.log("MongoDb is connected"))
-.catch ( err => console.log(err) )
+.catch ( err => console.log(err) );
 
-app.use('/', route)
+// app.use(
+//     function (req,res,next){
+//         console.log(moment().format('YYYY-MM-DD HH:mm:ss'),',',req.ip,',',req.path);
+//         next();
+//     }
+// );
 
+app.use('/', route);
 
-app.listen(process.env.PORT || 3000, function () {
+app.listen(process.env.PORT || 3000, function() {
     console.log('Express app running on port ' + (process.env.PORT || 3000))
 });
